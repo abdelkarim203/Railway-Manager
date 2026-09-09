@@ -1,5 +1,3 @@
-let prompt = require('prompt-sync')();
-
 const trips = [
     {
         id: 1,
@@ -182,6 +180,7 @@ const trips = [
         availableSeats: 50
     }
 ];
+let prompt = require('prompt-sync')();
 console.log(1 + ".afficher les trajets");
 console.log(2 + ".Acheter un ticket");
 console.log(3 + ". Afficher les tickets");
@@ -190,20 +189,20 @@ console.log(5 + ". Rechercher un ticket");
 console.log(6 + ". Filtrer les trajets");
 console.log(7 + ". Trier les trajets");
 console.log(0 + ". Quitter");
-let number = +prompt('enter your choice : ');
-
-switch (number) {
+let choice = +prompt('enter your choice : ');
+switch (choice) {
     case 1: AffichageTrajets();
         break;
-    case 2: achatTicket();
+    case 2:
+        achatTicket(trips);
         break;
     case 3: affichageTickets();
         break;
-    //case 4:annulationTicket();
-    //case 5:recherchTicket();
-    //case 6:filtrerTrajets();
-    //case 7:trierTrajets();
-    //case 0:quitter();
+    case 4: annulationTicket();
+    case 5: recherchTicket();
+    case 6: filtrerTrajets();
+    case 7: trierTrajets();
+    case 0: quitter();
 }
 function AffichageTrajets() {
     console.log("=== TRAJETS DISPONIBLES ===");
@@ -211,20 +210,40 @@ function AffichageTrajets() {
         console.log(trips[i].departure, " ->", trips[i].destination);
         console.log("Départ : ", trips[i].departureTime);
         console.log("Arrivée : ", trips[i].arrivalTime);
-        console.log("Prix : ", trips[i].price);
+        console.log("Prix : ", trips[i].price, "DH");
         console.log("Places disponibles : ", trips[i].availableSeats, '\n');
     }
 }
-function achatTicket() {
-    nom = prompt('Nom du passager : ');
-    identifiant = prompt('Identifiant du trajet : ');
+function achatTicket(trips) {
+
+    let nom = prompt('Nom du passager : ');
+    identifiant = +prompt('Identifiant du trajet : ');
+    let trajetTrouve;
+    let tickets = [];
+    let id =0
+    let places =0
     for (let i = 0; i < trips.length; i++) {
-        if (identifiant = trips[i].id) {
-            console.log(trips[i].id)
+        if (identifiant == trips[i].id &&  trips[i].availableSeats >= 1) {
+            console.log(trips[i]);
+            trajetTrouve = trips[i];
+            console.log("les places disponible : "+trips[i].availableSeats);
+            
+        
+        let ticket = {
+            ticketid: ++id,
+            username: nom,
+            tripId: trips[i].id,
+            seatNumber: ++places,
+            price: trips[i].price
         }
-        else {
-            console.log("aucune trajet");
-        }
+        tickets.push(ticket)
         break;
     }
+    
+    
 }
+console.log(tickets);
+
+}
+
+
