@@ -214,36 +214,45 @@ function AffichageTrajets() {
         console.log("Places disponibles : ", trips[i].availableSeats, '\n');
     }
 }
+
 function achatTicket(trips) {
 
     let nom = prompt('Nom du passager : ');
-    identifiant = +prompt('Identifiant du trajet : ');
+    identifiant = Number(prompt('Identifiant du trajet : '));
     let trajetTrouve;
-    let tickets = [];
-    let id =0
-    let places =0
+    const tickets = [];
+    let id = 0
+    let places = 0
+    let train = "Trajet introuvable"
     for (let i = 0; i < trips.length; i++) {
-        if (identifiant == trips[i].id &&  trips[i].availableSeats >= 1) {
+        if (identifiant == trips[i].id) {
+            console.log(trips[i].availableSeats);
+            
+            if (trips[i].availableSeats == 0){
+                console.log("Train complet");
+                return;
+            }
+            
+            --trips[i].availableSeats;
             console.log(trips[i]);
             trajetTrouve = trips[i];
-            console.log("les places disponible : "+trips[i].availableSeats);
-            
-        
-        let ticket = {
-            ticketid: ++id,
-            username: nom,
-            tripId: trips[i].id,
-            seatNumber: ++places,
-            price: trips[i].price
+            console.log("les places disponible : " + trips[i].availableSeats);
+            train = "trouvable"
+
+            let ticket = {
+                id: ++id,
+                username: nom,
+                tripId: trips[i].id,
+                seatNumber: ++places,
+                price: trips[i].price
+            }
+            tickets.push(ticket)
+            break;
         }
-        tickets.push(ticket)
-        break;
     }
-    
-    
-}
-console.log(tickets);
-
-}
-
-
+    console.log(tickets);
+   
+        if (train == 0) {
+            console.log('trajet introuvable');
+        }
+    }
