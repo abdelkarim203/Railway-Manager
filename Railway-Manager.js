@@ -259,8 +259,8 @@ function achatTicket(trips) {
             let seatNumber = counter + 1;
             let ticket = {
                 id: ++id,
-                start : trips[i].departure,
-                end : trips[i].destination,
+                start: trips[i].departure,
+                end: trips[i].destination,
                 passengerName: nom,
                 tripId: trips[i].id,
                 seatNumber: seatNumber,
@@ -335,7 +335,7 @@ function recherchTicket() {
         }
     }
     for (let ticket of ticketTrouve) {
-        let trajet ;
+        let trajet;
         for (let m = 0; m < trips.length; m++) {
             if (trips[m].id === ticket.tripId) {
                 trajet = trips[m];
@@ -352,14 +352,37 @@ function recherchTicket() {
     if (ticketTrouve.length === 0) {
         console.log("Aucun ticket trouve pour ca passager.");
         return;
-}
-}
-
-
-function filtrerTrajets() {
-
+    }
 }
 
 function trierTrajets() {
 
+    for (let i = 0; i < trips.length - 1; i++) {
+        for (let j = 0; j < trips.length - 1 - i; j++) {
+            if (trips[j].price > trips[j + 1].price) {
+                let temp = trips[j]
+                trips[j] = trips[j + 1]
+                trips[j + 1] = temp
+            }
+        }
+    }
+    console.log(trips);
+
 }
+
+function filtrerTrajets() {
+    let ville = prompt('entrer ville de depart : ');
+    for (let i = 0; i < trips.length; i++) {
+        if (ville == trips[i].departure.toLowerCase()) {
+
+            console.log(ville + "-->" + trips[i].destination);
+
+        }
+
+    }
+    return;
+
+}
+
+
+
