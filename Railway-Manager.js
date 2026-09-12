@@ -311,19 +311,23 @@ function annulationTicket() {
     identifiant = Number(prompt('Identifiant du ticket : '));
     for (let i = 0; i < tickets.length; i++) {
         if (tickets[i].id === identifiant) {
-            tickets.splice(identifiant - 1, 1)
-            for (j = 0; j < trips.length; j++) {
+            for (let j = 0; j < trips.length; j++) {
                 if (tickets[i].tripId == trips[j].id) {
                     ++trips[j].availableSeats
                     break;
                 }
             }
+            tickets.splice(i, 1)
+            console.log("ticket annule avec succes");
+            
+            return ; 
         }
 
     }
 
 
-    return "ticket introvable"
+    console.log("ticket introvable");
+    
 }
 
 
