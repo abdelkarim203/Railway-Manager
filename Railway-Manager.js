@@ -217,6 +217,10 @@ do {
         case 7: trierTrajets();
             break;
         case 0: quitter();
+<<<<<<< HEAD
+=======
+            console.log("Au revoir ");
+>>>>>>> b1cf0325c43ead71d89b9b62af42b7ac805db3c6
             break;
         default:
             console.log("Choix invalide.");
@@ -311,6 +315,7 @@ function annulationTicket() {
     identifiant = Number(prompt('Identifiant du ticket : '));
     for (let i = 0; i < tickets.length; i++) {
         if (tickets[i].id === identifiant) {
+<<<<<<< HEAD
             for (j=0 ; j < trips.length ; j++){
                 if (tickets[i].tripId == trips[j].id){
                     ++trips[j].availableSeats
@@ -321,12 +326,21 @@ function annulationTicket() {
             console.log("ticket annule avec succes");
             return;
             
+=======
+            tickets.splice(identifiant - 1, 1)
+            ++trips[i].availableSeats
+            break;
+>>>>>>> b1cf0325c43ead71d89b9b62af42b7ac805db3c6
         }
 
     }
 
 
+<<<<<<< HEAD
     console.log('\n'+"ticket introvable"+'\n');
+=======
+    return "ticket introvable"
+>>>>>>> b1cf0325c43ead71d89b9b62af42b7ac805db3c6
 }
 
 
@@ -380,6 +394,7 @@ function filtrerTrajets() {
     let ville = prompt('entrer ville de depart : ');
     for (let i = 0; i < trips.length; i++) {
         if (ville == trips[i].departure.toLowerCase()) {
+<<<<<<< HEAD
 
             console.log(ville + "-->" + trips[i].destination);
 
@@ -392,3 +407,17 @@ function filtrerTrajets() {
 function quitter(){
     console.log("Au revoir ");
 }
+=======
+
+            console.log(ville + "-->" + trips[i].destination);
+
+        }
+
+    }
+    return;
+
+}
+
+
+
+>>>>>>> b1cf0325c43ead71d89b9b62af42b7ac805db3c6
